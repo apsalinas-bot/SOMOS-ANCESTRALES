@@ -1158,7 +1158,7 @@ body.dark .rb-l{color:#CBD5E1}
       <div class="mix-grid" id="mixGrid"></div>
 
       <div class="chart-card">
-        <div class="chart-title" style="margin-bottom:10px">🏆 Lo que más ingresa</div>
+        <div class="chart-title" style="margin-bottom:10px">🏆 Lo que más vendes</div>
         <div id="topProds"></div>
       </div>
 
@@ -1198,9 +1198,10 @@ body.dark .rb-l{color:#CBD5E1}
   <!-- ── SERVICIOS (CATÁLOGO) ── -->
   <div id="tabCat" class="tab-content" style="display:none">
     <div class="page-head">
-      <div><div class="sect-title" style="margin-bottom:2px">🎨 Servicios</div><h2>Talleres y adicionales</h2></div>
-      <div style="display:flex;gap:6px">
+      <div><div class="sect-title" style="margin-bottom:2px">🎨 Servicios</div><h2>Talleres y kits</h2></div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end">
         <button class="btn btn-gold btn-sm no-print" onclick="openNewProd('prog')">+ Taller</button>
+        <button class="btn btn-elec btn-sm no-print" onclick="openNewProd('kit')">+ Kit</button>
         <button class="btn btn-ghost btn-sm no-print" onclick="openNewProd('adicional')">+ Adicional</button>
       </div>
     </div>
@@ -1342,7 +1343,7 @@ body.dark .rb-l{color:#CBD5E1}
     </div>
     <div class="fg" id="mpCatFg"><label id="mpCL">Categoría</label><input class="fi" id="mpC" list="mpCatList" placeholder="Ej: Materiales"><datalist id="mpCatList"></datalist></div>
     <div class="fg" id="mpProgFr"><label>Duración</label><input class="fi" id="mpDur" placeholder="Ej: 4 sesiones de 2 horas"></div>
-    <div class="fg" id="mpIncFg"><label>Qué incluye (sale en la cotización)</label>
+    <div class="fg" id="mpIncFg"><label id="mpIncL">Qué incluye (sale en la cotización)</label>
       <textarea class="fi" id="mpInc" rows="3" placeholder="Ej: Materiales, instructora, certificado de participación"></textarea></div>
     <div class="fg" id="mpPnFg">
       <div class="tog-inline" style="margin-bottom:0"><span>Se cobra por cada participante<br><small style="color:var(--muted)">Ej: kit de materiales o certificado. Si no, se cobra una sola vez.</small></span><button class="tog" id="mpPn" onclick="this.classList.toggle('on')"></button></div>
@@ -1397,10 +1398,10 @@ body.dark .rb-l{color:#CBD5E1}
       </div>
     </div>
     <div class="q-sec">
-      <div class="q-sec-t">🎨 Talleres y capacitaciones</div>
+      <div class="q-sec-t">🎨 Talleres, kits y productos</div>
       <div class="fg">
         <div style="display:flex;gap:8px">
-          <select class="fi" id="mqHSel" style="flex:1"><option value="">— Elige un taller —</option></select>
+          <select class="fi" id="mqHSel" style="flex:1"><option value="">— Elige un taller o kit —</option></select>
           <button class="btn btn-elec btn-sm" onclick="addRoom()" style="white-space:nowrap">+ Agregar</button>
         </div>
       </div>
@@ -1433,7 +1434,7 @@ body.dark .rb-l{color:#CBD5E1}
       <div class="adel-quick" id="mqAdelQ"></div>
       <div class="tog-inline"><span>Sumar IGV (18%)<br><small style="color:var(--muted)" id="mqIgvTxt">Solo si emites factura con IGV.</small></span><button class="tog" id="mqIgv" onclick="this.classList.toggle('on');calcQL()"></button></div>
       <div class="tot-box" id="mqTots" style="margin:0 0 12px">
-        <div class="tr2"><span>Talleres y capacitaciones</span><span id="mqTHab">S/. 0.00</span></div>
+        <div class="tr2"><span>Talleres y kits</span><span id="mqTHab">S/. 0.00</span></div>
         <div class="tr2"><span>Adicionales</span><span id="mqTAd">S/. 0.00</span></div>
         <div class="tr2 neg" id="mqRowDsc" style="display:none"><span>(−) Descuento</span><span id="mqTDsc">S/. 0.00</span></div>
         <div class="tr2" id="mqRowIgv" style="display:none"><span>IGV (18%)</span><span id="mqTIgv">S/. 0.00</span></div>
@@ -1485,12 +1486,12 @@ body.dark .rb-l{color:#CBD5E1}
   <div class="modal-sheet">
     <div class="mh"></div>
     <div class="mt">Registrar ingreso</div>
-    <div class="ms">Clases sueltas, venta de artesanía, kits u otros ingresos</div>
+    <div class="ms">Ventas del día: kits, artesanía, ferias, clases sueltas u otros ingresos</div>
     <div class="fg"><label>Tipo de ingreso *</label><select class="fi" id="msTipo"></select></div>
     <div class="fg"><label>De mis servicios (opcional)</label>
       <select class="fi" id="msServ" onchange="onServSel()"><option value="">— Ninguno —</option></select>
     </div>
-    <div class="fg"><label>Descripción</label><input class="fi" id="msDesc" placeholder="Ej: Clase de charango (2 alumnos)"></div>
+    <div class="fg"><label>Descripción</label><input class="fi" id="msDesc" placeholder="Ej: 2 Kits Aprendiendo Sikuri (feria)"></div>
     <div class="fr">
       <div class="fg"><label>Monto (S/.) *</label><input class="fi" type="number" id="msTot" placeholder="0.00" min="0" step="0.01"></div>
       <div class="fg"><label>Fecha</label><input class="fi" type="date" id="msDate"></div>
@@ -1631,14 +1632,14 @@ const PAGO_COLS={Efectivo:'#059669',Yape:'#7C3AED',Plin:'#0891B2',Transferencia:
 const ORIGEN_OPTS=['WhatsApp','Instagram','Facebook','TikTok','Recomendación','Cliente anterior','Feria o evento','Convocatoria de una institución','Otro'];
 const RECEP_OPTS=ORIGEN_OPTS;
 const CANAL_COLS={'WhatsApp':'#16A34A','Instagram':'#C13584','Facebook':'#1877F2','TikTok':'#1F1A16','Recomendación':'#059669','Cliente anterior':'#D97706','Feria o evento':'#C9972B','Convocatoria de una institución':'#7C3AED','Otro':'#64748B'};
-const INGRESO_TIPOS=['Talleres y capacitaciones','Clases de música','Presentaciones y eventos','Venta de artesanía','Materiales y kits','Otro ingreso'];
-const TIPO_COLS={'Talleres y capacitaciones':'#9C2F4A','Clases de música':'#C9972B','Presentaciones y eventos':'#7C3AED','Venta de artesanía':'#059669','Materiales y kits':'#0891B2','Otro ingreso':'#475569'};
+const INGRESO_TIPOS=['Talleres y capacitaciones','Venta de kits','Venta de artesanía','Clases de música','Presentaciones y eventos','Otro ingreso'];
+const TIPO_COLS={'Talleres y capacitaciones':'#9C2F4A','Venta de kits':'#0891B2','Venta de artesanía':'#059669','Clases de música':'#C9972B','Presentaciones y eventos':'#7C3AED','Otro ingreso':'#475569'};
 const EGRESO_CATS=['Materiales e insumos','Facilitadores e instructores','Alquiler de local','Movilidad y viáticos','Instrumentos y equipos','Impresiones y certificados','Publicidad y redes','Luz, agua e internet','Impuestos y trámites','Otros gastos'];
 const DOC_OPTS=['DNI','RUC','Pasaporte','Carné de extranjería'];
-const CLIENTE_TIPOS=['Particular','Colegio','Universidad o instituto','Empresa','Municipalidad o entidad pública','ONG o asociación','Agencia de turismo','Grupo de turistas'];
+const CLIENTE_TIPOS=['Particular','Turista o extranjero','Colegio','Universidad o instituto','DDC u otra entidad de cultura','Municipalidad o entidad pública','Empresa','ONG o asociación','Agencia de turismo'];
 // Cómo se cobra cada taller: [código, etiqueta, plural, singular]
 const UNIDADES=[['participante','por participante','participantes','participante'],['sesion','por sesión','sesiones','sesión'],
-  ['hora','por hora','horas','hora'],['grupo','por taller (precio cerrado)','talleres','taller'],['unidad','por unidad','unidades','unidad']];
+  ['hora','por hora','horas','hora'],['grupo','por paquete o grupo (precio cerrado)','paquetes','paquete'],['unidad','por unidad','unidades','unidad']];
 const MODALIDADES=['Presencial','Virtual','Semipresencial'];
 const IGV_TASA=0.18;
 // Mensajes sugeridos de WhatsApp. Las palabras entre llaves se llenan solas;
@@ -1653,18 +1654,25 @@ const CHAT_PLANTILLAS=[
   ['recordar','Recordar un pago','Hola{nombre}, le escribo de {negocio} para recordarle el saldo pendiente de su servicio. Quedo atenta. ¡Muchas gracias!'],
   ['blanco','Mensaje en blanco','']
 ];
-// Servicios iniciales: nombres de referencia y sin precio; ella los cambia en Servicios.
+// Catálogo inicial (sin precios; ella los pone en Servicios). Tres tipos:
+//  prog = taller o capacitación · kit = kit o producto (cada uno con su propio contenido,
+//  no se mezclan) · adicional = algo que se suma (certificado, refrigerio, movilidad…).
 const SEED_CAT=[
-  {kind:'prog',name:'Taller de arte',price:0,uni:'participante',dur:'',inc:'',desc:'',cat:'Arte'},
-  {kind:'prog',name:'Taller de música',price:0,uni:'participante',dur:'',inc:'',desc:'',cat:'Música'},
-  {kind:'prog',name:'Taller de artesanía',price:0,uni:'participante',dur:'',inc:'',desc:'',cat:'Artesanía'},
-  {kind:'prog',name:'Capacitación a medida para instituciones',price:0,uni:'grupo',dur:'',inc:'',desc:'',cat:'Capacitaciones'},
-  {kind:'adicional',name:'Kit de materiales',price:0,cat:'Materiales',pp:true,desc:'por participante'},
+  {kind:'prog',name:'Taller de sikuri',price:0,uni:'participante',dur:'',inc:'',desc:'',cat:'Música'},
+  {kind:'prog',name:'Taller de cerámica',price:0,uni:'participante',dur:'',inc:'',desc:'',cat:'Artesanía'},
+  {kind:'prog',name:'Taller de encuadernado',price:0,uni:'participante',dur:'',inc:'',desc:'',cat:'Artesanía'},
+  {kind:'prog',name:'Taller para un salón (paquete)',price:0,uni:'grupo',dur:'',inc:'',desc:'Ej: hasta 20 participantes',cat:'Paquetes'},
+  {kind:'kit',name:'Kit Aprendiendo Sikuri',price:0,inc:'Cuadernillo propio del kit',cat:'Kits',desc:''},
+  {kind:'kit',name:'Kit de Cerámica',price:0,inc:'Cuadernillo propio del kit',cat:'Kits',desc:''},
+  {kind:'kit',name:'Kit de Encuadernado',price:0,inc:'Cuadernillo propio del kit',cat:'Kits',desc:''},
+  {kind:'kit',name:'Artesanía (pieza individual)',price:0,inc:'',cat:'Artesanía',desc:''},
   {kind:'adicional',name:'Certificado de participación',price:0,cat:'Certificados',pp:true,desc:''},
   {kind:'adicional',name:'Refrigerio',price:0,cat:'Alimentación',pp:true,desc:''},
   {kind:'adicional',name:'Movilidad del equipo',price:0,cat:'Logística',pp:false,desc:'talleres fuera de Arequipa ciudad'},
   {kind:'adicional',name:'Sesión adicional',price:0,cat:'Servicios',pp:false,desc:''}
 ];
+// Nombres del primer catálogo de ejemplo (para reemplazarlo si ella aún no lo tocó)
+const SEED_VIEJO=['Taller de arte','Taller de música','Taller de artesanía','Capacitación a medida para instituciones','Kit de materiales','Certificado de participación','Refrigerio','Movilidad del equipo','Sesión adicional'];
 // ══ STATE ══════════════════════════════════════════════════════════
 let CU=null;
 let DB=emptyDB();
@@ -2104,7 +2112,15 @@ function normDB(o){
   if(!d.profile.baseOk){Object.keys(PERFIL_BASE).forEach(k=>{if(!d.profile[k])d.profile[k]=PERFIL_BASE[k];});d.profile.baseOk=1;}
   if(d.profile.adelPct==null)d.profile.adelPct=50;
   // Primer ingreso: los servicios arrancan con talleres y adicionales de referencia (sin precio)
-  if(!d.seeded&&!d.products.length){d.products=JSON.parse(JSON.stringify(SEED_CAT));d.seeded=true;}
+  if(!d.seeded&&!d.products.length){d.products=JSON.parse(JSON.stringify(SEED_CAT));d.seeded=true;d.kitsV2=true;}
+  // Catálogo v2 (talleres, kits y adicionales según la reunión con Lucero):
+  // si el catálogo de ejemplo sigue intacto, se reemplaza; si ya lo editó, solo se suman los kits.
+  if(!d.kitsV2){
+    const intacto=d.products.every(p=>!Number(p.price)&&SEED_VIEJO.includes(p.name));
+    if(intacto&&!(d.quotes||[]).length)d.products=JSON.parse(JSON.stringify(SEED_CAT));
+    else if(!d.products.some(p=>p.kind==='kit'))d.products=d.products.concat(JSON.parse(JSON.stringify(SEED_CAT.filter(p=>p.kind==='kit'))));
+    d.kitsV2=true;
+  }
   return d;
 }
 function readLocal(){try{const r=localStorage.getItem(LS_KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
@@ -2398,7 +2414,7 @@ async function exportarTodoExcel(){
     const det=[['id_cotizacion',...CAB_FECHA,'cliente','estado','tipo_linea','concepto','cantidad','unidad','por_participante','precio_unitario','importe_soles']];
     (DB.quotes||[]).forEach(q=>{
       const n=partQ(q);
-      (q.rooms||[]).forEach(r=>det.push([q.id||'',...colsFecha(q.ts),q.cli||'',est(q),'Taller',r.name||'',Number(r.qty)||1,uniInfo(r.uni)[2],'',Number(r.price)||0,importeRoom(r)]));
+      (q.rooms||[]).forEach(r=>det.push([q.id||'',...colsFecha(q.ts),q.cli||'',est(q),esKitL(r)?'Kit':'Taller',r.name||'',Number(r.qty)||1,uniInfo(r.uni)[2],'',Number(r.price)||0,importeRoom(r)]));
       (q.lines||[]).forEach(l=>det.push([q.id||'',...colsFecha(q.ts),q.cli||'',est(q),'Adicional',l.name||'',(Number(l.qty)||1)*(l.pp?Math.max(1,n):1),'unidades',l.pp?'Sí':'No',Number(l.price)||0,importeLine(l,n)]));
     });
 
@@ -2409,9 +2425,9 @@ async function exportarTodoExcel(){
     const prods=[['tipo','nombre','linea_o_categoria','precio_soles','cobro','duracion','incluye','nota','veces_cotizado']];
     (DB.products||[]).forEach(p=>{
       let veces=0;
-      (DB.quotes||[]).forEach(q=>((esHab(p)?q.rooms:q.lines)||[]).forEach(l=>{if((l.base||l.name)===p.name)veces++;}));
-      prods.push([esHab(p)?'Taller':'Adicional',p.name||'',p.cat||'',Number(p.price)||0,
-        esHab(p)?uniInfo(p.uni)[1]:(p.pp?'Por participante':'Una vez'),esHab(p)?(p.dur||''):'',p.inc||'',p.desc||'',veces]);
+      (DB.quotes||[]).forEach(q=>((kindDe(p)!=='adicional'?q.rooms:q.lines)||[]).forEach(l=>{if((l.base||l.name)===p.name)veces++;}));
+      prods.push([{prog:'Taller',kit:'Kit',adicional:'Adicional'}[kindDe(p)],p.name||'',p.cat||'',Number(p.price)||0,
+        esHab(p)?uniInfo(p.uni)[1]:(esKit(p)?'Por unidad':(p.pp?'Por participante':'Una vez')),esHab(p)?(p.dur||''):'',p.inc||'',p.desc||'',veces]);
     });
 
     const info=[['campo','valor'],
@@ -2698,7 +2714,7 @@ function renderMix(sales,exps){
   const conf=filterByPeriod(DB.quotes.filter(q=>q.status==='won').map(q=>({q,ts:q.wonTs||q.ts})));
   const tall=[];conf.forEach(({q})=>(q.rooms||[]).forEach(r=>tall.push({k:r.name,total:importeRoom(r)})));
   el.innerHTML=mixBloque('💳 Forma de pago',sales,s=>s.pago,PAGO_COLS)+
-    mixBloque('🎨 Talleres que más ingresan',tall,x=>x.k,null)+
+    mixBloque('🎨 Talleres y kits que más ingresan',tall,x=>x.k,null)+
     mixBloque('🏫 Tipo de cliente',conf.map(({q})=>({proc:q.proc||'Sin dato',total:q.tot})),x=>x.proc,null)+
     mixBloque('🧾 Gastos por tipo',(exps||[]).map(e=>({cat:e.cat,total:e.monto})),e=>e.cat,null);
 }
@@ -2742,70 +2758,83 @@ function renderMovs(el,list,conBorrar){
   }).join('');
 }
 
-// ══ SERVICIOS: TALLERES Y ADICIONALES ══════════════════════════════
-// "prog" = taller o capacitación (precio por participante, sesión, hora o taller cerrado)
-// "adicional" = materiales, certificados, refrigerio, movilidad… (una vez o por participante)
+// ══ SERVICIOS: TALLERES, KITS Y ADICIONALES ════════════════════════
+// "prog" = taller o capacitación (precio por participante, sesión, hora o paquete)
+// "kit"  = kit o producto (Aprendiendo Sikuri, Cerámica, artesanía…) con su propio contenido
+// "adicional" = certificado, refrigerio, movilidad… (una vez o por participante)
 function esHab(p){return p&&(p.kind==='prog'||p.kind==='hab');}
+function esKit(p){return p&&p.kind==='kit';}
+function kindDe(p){return esHab(p)?'prog':(esKit(p)?'kit':'adicional');}
+function esKitL(r){return r&&r.k==='kit';}
 function uniInfo(u){return UNIDADES.find(x=>x[0]===u)||UNIDADES[0];}
 function uniCant(u,n){const x=uniInfo(u);n=Number(n)||0;return n+' '+(n===1?x[3]:x[2]);}
-function uniCorta(u){return {participante:'/ participante',sesion:'/ sesión',hora:'/ hora',grupo:'/ taller',unidad:'/ unidad'}[uniInfo(u)[0]];}
+function uniCorta(u){return {participante:'/ participante',sesion:'/ sesión',hora:'/ hora',grupo:'/ paquete',unidad:'/ unidad'}[uniInfo(u)[0]];}
 function precioTag(p,sufijo){return Number(p.price)>0?`<div class="pc-price">${fmt(p.price)}${sufijo?`<small style="font-size:10px;font-weight:600;color:var(--muted)"> ${sufijo}</small>`:''}</div>`:'<span class="no-price">Pon el precio</span>';}
+function tarjetaCat(p,i,sufijo){
+  return `<div class="pkg-card"><div class="pkg-top"><div style="flex:1;min-width:0"><div class="pkg-name">${escS8(p.name)}</div><div style="margin-top:3px">${precioTag(p,sufijo)}</div></div>
+    <div class="pc-acts"><button class="ic-btn" onclick="editProd(${i})" title="Editar">✏️</button><button class="ic-btn" onclick="dupProd(${i})" title="Duplicar">⧉</button><button class="ic-btn d" onclick="delProd(${i})" title="Eliminar">🗑️</button></div></div>
+    <div class="pkg-inc">${p.dur?`<div><b>${escS8(p.dur)}</b></div>`:''}${p.inc?`<div>${esKit(p)?'Trae':'Incluye'}: ${escS8(p.inc)}</div>`:''}${p.desc?`<div>${escS8(p.desc)}</div>`:''}</div>
+    ${!p.inc&&!p.dur?`<div class="hint">Toca ✏️ para poner precio y ${esKit(p)?'lo que trae el kit':'qué incluye'}.</div>`:''}</div>`;
+}
 function renderCat(){
   const el=$('catList');
-  if(!DB.products.length){el.innerHTML='<div class="empty"><span class="ei">🎨</span><p>Aún no tienes servicios.<br>Crea tu primer taller con <strong>+ Taller</strong>.</p></div>';return;}
-  const prog=DB.products.map((p,i)=>({p,i})).filter(x=>esHab(x.p));
-  const ad=DB.products.map((p,i)=>({p,i})).filter(x=>!esHab(x.p));
+  if(!DB.products.length){el.innerHTML='<div class="empty"><span class="ei">🎨</span><p>Aún no tienes servicios.<br>Crea tu primer taller con <strong>+ Taller</strong> o tu primer kit con <strong>+ Kit</strong>.</p></div>';return;}
+  const all=DB.products.map((p,i)=>({p,i}));
+  const prog=all.filter(x=>esHab(x.p)),kits=all.filter(x=>esKit(x.p)),ad=all.filter(x=>kindDe(x.p)==='adicional');
+  const sec=t=>`<div class="sdiv" style="margin:16px 0 4px"><div class="sl"></div><div class="st">${t}</div><div class="sl"></div></div>`;
+  const grupos=(arr,def,suf)=>[...new Set(arr.map(x=>x.p.cat||def))].map(lin=>`<div class="cat-h"><span style="background:var(--casa)"></span>${escS8(lin)}</div>`+
+      arr.filter(x=>(x.p.cat||def)===lin).map(({p,i})=>tarjetaCat(p,i,suf(p))).join('')).join('');
   let h='';
-  if(prog.length){
-    const lineas=[...new Set(prog.map(x=>x.p.cat||'Talleres'))];
-    h+=lineas.map(lin=>`<div class="cat-h"><span style="background:var(--casa)"></span>${escS8(lin)}</div>`+
-      prog.filter(x=>(x.p.cat||'Talleres')===lin).map(({p,i})=>`<div class="pkg-card"><div class="pkg-top"><div style="flex:1;min-width:0"><div class="pkg-name">${escS8(p.name)}</div><div style="margin-top:3px">${precioTag(p,uniCorta(p.uni))}</div></div>
-        <div class="pc-acts"><button class="ic-btn" onclick="editProd(${i})" title="Editar">✏️</button><button class="ic-btn" onclick="dupProd(${i})" title="Duplicar">⧉</button><button class="ic-btn d" onclick="delProd(${i})" title="Eliminar">🗑️</button></div></div>
-        <div class="pkg-inc">${p.dur?`<div><b>${escS8(p.dur)}</b></div>`:''}${p.inc?`<div>Incluye: ${escS8(p.inc)}</div>`:''}${p.desc?`<div>${escS8(p.desc)}</div>`:''}</div>
-        ${!p.inc&&!p.dur?'<div class="hint">Toca ✏️ para poner precio, duración y qué incluye.</div>':''}</div>`).join('')).join('');
+  if(prog.length)h+=sec('Talleres y capacitaciones')+grupos(prog,'Talleres',p=>uniCorta(p.uni));
+  if(kits.length)h+=sec('Kits y productos')+grupos(kits,'Kits',()=>'');
+  if(ad.length){
+    h+=sec('Adicionales');
+    const cats=[...new Set(ad.map(x=>x.p.cat||'Adicionales'))];
+    h+=cats.map((cat,ci)=>{
+      const col=CAT_COLS[(ci+1)%CAT_COLS.length];
+      return `<div style="margin:10px 0"><div class="cat-h"><span style="background:${col}"></span>${escS8(cat)}</div>
+        ${ad.filter(x=>(x.p.cat||'Adicionales')===cat).map(({p,i})=>`<div class="prod-row">
+          <div class="pc-dot" style="background:${col}"></div>
+          <div class="pc-info"><div class="pc-name">${escS8(p.name)}</div><div class="pc-meta">${p.pp?'Por participante':'Una vez'}${p.desc?' · '+escS8(p.desc):''}</div></div>
+          ${precioTag(p)}
+          <div class="pc-acts"><button class="ic-btn" onclick="editProd(${i})">✏️</button><button class="ic-btn d" onclick="delProd(${i})">🗑️</button></div>
+        </div>`).join('')}</div>`;
+    }).join('');
   }
-  const cats=[...new Set(ad.map(x=>x.p.cat||'Adicionales'))];
-  h+=cats.map((cat,ci)=>{
-    const col=CAT_COLS[(ci+1)%CAT_COLS.length];
-    return `<div style="margin:14px 0"><div class="cat-h"><span style="background:${col}"></span>${escS8(cat)}</div>
-      ${ad.filter(x=>(x.p.cat||'Adicionales')===cat).map(({p,i})=>`<div class="prod-row">
-        <div class="pc-dot" style="background:${col}"></div>
-        <div class="pc-info"><div class="pc-name">${escS8(p.name)}</div><div class="pc-meta">${p.pp?'Por participante':'Una vez'}${p.desc?' · '+escS8(p.desc):''}</div></div>
-        ${precioTag(p)}
-        <div class="pc-acts"><button class="ic-btn" onclick="editProd(${i})">✏️</button><button class="ic-btn d" onclick="delProd(${i})">🗑️</button></div>
-      </div>`).join('')}</div>`;
-  }).join('');
   h+='<div class="hint" style="text-align:center;margin-top:6px">Lo que no tenga precio también se puede cotizar: el precio lo pones en cada cotización.</div>';
   el.innerHTML=h;
 }
 function abrirProd(kind,p){
   editKind=kind;
-  const prog=kind==='prog';
-  $('mProdTitle').textContent=(p?'Editar ':'Nuevo ')+(prog?'taller':'adicional');
-  $('mProdSub').textContent=prog?'Taller o capacitación con su precio':'Algo que se suma al taller, con su propio precio';
-  $('mpN').placeholder=prog?'Ej: Taller de música':'Ej: Kit de materiales';
+  const prog=kind==='prog',kit=kind==='kit';
+  $('mProdTitle').textContent=(p?'Editar ':'Nuevo ')+(prog?'taller':(kit?'kit o producto':'adicional'));
+  $('mProdSub').textContent=prog?'Taller o capacitación con su precio':(kit?'Cada kit con su propio contenido y precio':'Algo que se suma al taller, con su propio precio');
+  $('mpN').placeholder=prog?'Ej: Taller de sikuri':(kit?'Ej: Kit Aprendiendo Sikuri':'Ej: Certificado de participación');
   $('mpPL').textContent='Precio (S/.)';
   $('mpN').value=p?p.name:'';$('mpP').value=p&&Number(p.price)?p.price:'';$('mpD').value=p?(p.desc||''):'';
   $('mpUni').innerHTML=UNIDADES.map(u=>`<option value="${u[0]}">${u[1]}</option>`).join('');
   $('mpUni').value=p&&p.uni?p.uni:'participante';
   $('mpUniFg').style.display=prog?'block':'none';
   $('mpProgFr').style.display=prog?'block':'none';$('mpDur').value=p?(p.dur||''):'';
-  $('mpIncFg').style.display=prog?'block':'none';$('mpInc').value=p?(p.inc||''):'';
+  $('mpIncFg').style.display=(prog||kit)?'block':'none';$('mpInc').value=p?(p.inc||''):'';
+  $('mpIncL').textContent=kit?'Qué trae el kit (sale en la cotización)':'Qué incluye (sale en la cotización)';
+  $('mpInc').placeholder=kit?'Ej: Sikus, cuadernillo de la práctica, bolsa de tela':'Ej: Materiales, instructora, certificado de participación';
   $('mpCL').textContent=prog?'Línea (para ordenar tus talleres)':'Categoría';
-  $('mpC').placeholder=prog?'Ej: Música':'Ej: Materiales';
-  $('mpC').value=p?(p.cat||''):'';
-  $('mpPnFg').style.display=prog?'none':'block';$('mpPn').className='tog'+(p&&p.pp?' on':'');
-  $('mpCatList').innerHTML=[...new Set(DB.products.filter(x=>esHab(x)===prog).map(x=>x.cat).filter(Boolean))].map(c=>`<option value="${escS8(c)}">`).join('');
+  $('mpC').placeholder=prog?'Ej: Música':(kit?'Ej: Kits':'Ej: Certificados');
+  $('mpC').value=p?(p.cat||''):(kit?'Kits':'');
+  $('mpPnFg').style.display=(prog||kit)?'none':'block';$('mpPn').className='tog'+(p&&p.pp?' on':'');
+  $('mpCatList').innerHTML=[...new Set(DB.products.filter(x=>kindDe(x)===kind).map(x=>x.cat).filter(Boolean))].map(c=>`<option value="${escS8(c)}">`).join('');
   $('mProd').classList.add('on');
 }
 function openNewProd(kind){editPI=-1;abrirProd(kind||'prog',null);setTimeout(()=>$('mpN').focus(),200);}
-function editProd(i){editPI=i;const p=DB.products[i];abrirProd(esHab(p)?'prog':'adicional',p);}
+function editProd(i){editPI=i;const p=DB.products[i];abrirProd(kindDe(p),p);}
 function dupProd(i){const p=JSON.parse(JSON.stringify(DB.products[i]));p.name=p.name+' (copia)';DB.products.splice(i+1,0,p);saveData();renderCat();populateSels();toast('✓ Taller duplicado: edítalo',true);}
 function saveProd(){
   const name=$('mpN').value.trim();const price=Math.max(0,Number($('mpP').value)||0);
   if(!name){toast('Escribe el nombre');return;}
-  const prog=editKind==='prog';
+  const prog=editKind==='prog',kit=editKind==='kit';
   const p=prog?{kind:'prog',name,price,uni:$('mpUni').value||'participante',dur:$('mpDur').value.trim(),inc:$('mpInc').value.trim(),cat:$('mpC').value.trim(),desc:$('mpD').value.trim()}
+         :kit?{kind:'kit',name,price,inc:$('mpInc').value.trim(),cat:$('mpC').value.trim()||'Kits',desc:$('mpD').value.trim()}
              :{kind:'adicional',name,price,cat:$('mpC').value.trim()||'Adicionales',pp:$('mpPn').classList.contains('on'),desc:$('mpD').value.trim()};
   if(editPI>=0){const viejo=DB.products[editPI].name;DB.products[editPI]=p;
     if(viejo!==name)(DB.quotes||[]).forEach(q=>(q.lines||[]).concat(q.rooms||[]).forEach(l=>{if((l.base||l.name)===viejo){l.base=name;}}));}
@@ -2814,10 +2843,13 @@ function saveProd(){
 }
 function delProd(i){if(!confirm('¿Eliminar «'+DB.products[i].name+'»? Las cotizaciones ya hechas no cambian.'))return;DB.products.splice(i,1);saveData();renderCat();populateSels();}
 function populateSels(){
-  const prog=DB.products.map((p,i)=>({p,i})).filter(x=>esHab(x.p));
-  const ad=DB.products.map((p,i)=>({p,i})).filter(x=>!esHab(x.p));
+  const all=DB.products.map((p,i)=>({p,i}));
+  const prog=all.filter(x=>esHab(x.p)),kits=all.filter(x=>esKit(x.p));
+  const ad=all.filter(x=>kindDe(x.p)==='adicional');
   const lbl=(p,s)=>escS8(p.name)+(Number(p.price)?' — '+fmt(p.price)+(s?' '+s:''):'');
-  $('mqHSel').innerHTML='<option value="">— Elige un taller —</option>'+prog.map(({p,i})=>`<option value="${i}">${lbl(p,uniCorta(p.uni))}</option>`).join('');
+  $('mqHSel').innerHTML='<option value="">— Elige un taller o kit —</option>'+
+    (prog.length?'<optgroup label="Talleres y capacitaciones">'+prog.map(({p,i})=>`<option value="${i}">${lbl(p,uniCorta(p.uni))}</option>`).join('')+'</optgroup>':'')+
+    (kits.length?'<optgroup label="Kits y productos">'+kits.map(({p,i})=>`<option value="${i}">${lbl(p,'')}</option>`).join('')+'</optgroup>':'');
   $('mqPSel').innerHTML='<option value="">— Elige un adicional —</option>'+ad.map(({p,i})=>`<option value="${i}">${lbl(p,p.pp?'/ participante':'')}</option>`).join('');
   $('msServ').innerHTML='<option value="">— Ninguno —</option>'+DB.products.map((p,i)=>`<option value="${i}">${lbl(p)}</option>`).join('');
 }
@@ -2908,16 +2940,16 @@ function onPart(){
   qRooms.forEach(r=>{if(r.uni==='participante'&&r.autoQ!==false)r.qty=Math.max(1,n||1);});
   renderRooms();renderQL();
 }
-function addRoom(){const v=$('mqHSel').value;if(v===''){toast('Elige un taller');return;}const p=DB.products[+v];
-  const uni=p.uni||'participante';
-  qRooms.push({base:p.name,name:p.name,price:Number(p.price)||0,qty:uni==='participante'?Math.max(1,partForm()||1):1,uni,inc:p.inc||'',dur:p.dur||'',autoQ:uni==='participante'});
+function addRoom(){const v=$('mqHSel').value;if(v===''){toast('Elige un taller o kit');return;}const p=DB.products[+v];
+  const kit=esKit(p);const uni=kit?'unidad':(p.uni||'participante');
+  qRooms.push({base:p.name,name:p.name,price:Number(p.price)||0,qty:uni==='participante'?Math.max(1,partForm()||1):1,uni,inc:p.inc||'',dur:p.dur||'',autoQ:uni==='participante',k:kit?'kit':''});
   $('mqHSel').value='';renderRooms();
   if(uni==='participante'&&!partForm())toast('Pon el número de participantes: la cantidad se ajusta sola');
   if(!Number(p.price))setTimeout(()=>{const x=$('rmpr'+(qRooms.length-1));if(x)x.focus();},50);}
 function subRoom(r){return uniCant(r.uni,r.qty)+(r.dur?' · '+r.dur:'');}
 function renderRooms(){
   const el=$('mqRooms');
-  if(!qRooms.length){el.innerHTML='<div class="hint">Agrega al menos un taller o capacitación.</div>';calcQL();return;}
+  if(!qRooms.length){el.innerHTML='<div class="hint">Agrega un taller, un kit o ambos.</div>';calcQL();return;}
   el.innerHTML=qRooms.map((r,i)=>`<div class="ql">
       <div class="ql-n" title="${escS8(r.name)}">${escS8(r.name)}</div>
       <input class="ql-q" type="number" value="${r.qty}" min="1" oninput="updRQ(${i},this.value)" title="Cantidad (${uniInfo(r.uni)[2]})">
@@ -2995,7 +3027,7 @@ function openEditQuote(idx){
 function tipoDoc(doc){const d=String(doc||'');if(/^\d{8}$/.test(d))return 'DNI';if(/^\d{11}$/.test(d))return 'RUC';if(/^\d{9}$/.test(d))return 'CE';return d?'Pasaporte':'';}
 function saveQuote(){
   const cli=$('mqCli').value.trim();if(!cli){toast('Escribe el nombre del cliente');return;}
-  if(!qRooms.length&&!qLines.length){toast('Agrega al menos un taller o un adicional');return;}
+  if(!qRooms.length&&!qLines.length){toast('Agrega al menos un taller, un kit o un adicional');return;}
   const T=calcQL();
   if(!T.tot&&!confirm('El total está en S/ 0.00. Pon el precio de los talleres. ¿Guardar igual?'))return;
   const doc=$('mqDoc').value.replace(/[^0-9A-Za-z]/g,'').toUpperCase();
@@ -3044,7 +3076,7 @@ function renderQuoteList(){
       <div class="qr-h"><span class="qr-id">${escS8(numQ(q))}${q.rev?`<span class="q-edited">✏️ v${q.rev+1}</span>`:''}</span><span class="qr-date">${fmtDate(q.ts)}</span></div>
       <div class="qr-cli">${escS8(q.cli)}${q.inst?` <span style="font-size:11px;color:var(--muted);font-weight:500">· ${escS8(q.inst)}</span>`:''}</div>
       <div class="qr-stay">📅 ${escS8(det)}</div>
-      <div class="qr-items">${escS8(habTxt(q)||'Sin taller')}${(q.lines||[]).length?' + '+q.lines.length+' adicional'+(q.lines.length===1?'':'es'):''}</div>
+      <div class="qr-items">${escS8(habTxt(q)||'Solo adicionales')}${(q.lines||[]).length?' + '+q.lines.length+' adicional'+(q.lines.length===1?'':'es'):''}</div>
       ${extra.length?`<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px">${extra.join('')}</div>`:''}
       <div class="qr-f"><span class="qr-total">${fmt(q.tot)}</span><span class="qs ${sm[q.status]||'qs-p'}">${estadoTxt(q)}</span></div>
     </div>`;
@@ -3060,10 +3092,10 @@ function openQD(idx){
     <div class="ms">${fmtDate(q.ts)}${q.inst?' · '+escS8(q.inst):''}${q.rsNum?' · cotización '+escS8(q.id):''}${q.tel?' · '+escS8(q.tel):''}${q.doc?' · '+(q.docType||'Doc')+' '+escS8(q.doc):''}${q.editedTs?' · editada '+fmtDate(q.editedTs):''}</div>
     <div class="stay-band"><div class="d"><small>${variosDias(q)?'Fechas':'Fecha'}</small><b>${escS8(fechasCortas(q))}</b></div><div class="n">${n?partTxt(n):'Participantes por definir'}</div></div>
     <div style="display:flex;flex-wrap:wrap;gap:5px;margin:0 0 8px">${chips.map(t=>`<span class="m-chip">${escS8(t)}</span>`).join('')}</div>
-    ${(q.rooms||[]).length?`<div class="qd-sec"><div class="qd-k">Talleres y capacitaciones</div>${q.rooms.map(r=>fila(`${escS8(r.name)} <span style="color:var(--muted);font-size:11px">· ${escS8(uniCant(r.uni,r.qty))} × ${fmt(r.price)}</span>`,fmt(importeRoom(r)))).join('')}</div>`:''}
+    ${[['Talleres y capacitaciones',(q.rooms||[]).filter(r=>!esKitL(r))],['Kits y productos',(q.rooms||[]).filter(esKitL)]].filter(x=>x[1].length).map(([t,rs])=>`<div class="qd-sec"><div class="qd-k">${t}</div>${rs.map(r=>fila(`${escS8(r.name)} <span style="color:var(--muted);font-size:11px">· ${escS8(uniCant(r.uni,r.qty))} × ${fmt(r.price)}</span>`,fmt(importeRoom(r)))).join('')}</div>`).join('')}
     ${(q.lines||[]).length?`<div class="qd-sec"><div class="qd-k">Adicionales</div>${q.lines.map(l=>fila(`${l.qty>1?l.qty+'× ':''}${escS8(l.name)}${l.pp?' <span style="color:var(--muted);font-size:11px">· × '+(n||1)+' participantes</span>':''}`,fmt(importeLine(l,n)))).join('')}</div>`:''}
     <div class="tot-box" style="margin-top:10px">
-      <div class="tr2"><span>Talleres y capacitaciones</span><span>${fmt(q.totHab)}</span></div>
+      <div class="tr2"><span>Talleres y kits</span><span>${fmt(q.totHab)}</span></div>
       ${Number(q.totAd)?`<div class="tr2"><span>Adicionales</span><span>${fmt(q.totAd)}</span></div>`:''}
       ${Number(q.dscto)?`<div class="tr2 neg"><span>(−) Descuento</span><span>− ${fmt(q.dscto)}</span></div>`:''}
       ${q.igv?`<div class="tr2"><span>IGV (18%)</span><span>${fmt(q.igvM)}</span></div>`:''}
@@ -3092,13 +3124,15 @@ function openQD(idx){
 }
 // Todo lo que el ingreso hereda del servicio confirmado
 function tipoDeCot(q){
-  const t=((q.rooms||[]).map(r=>r.name+' '+(r.cat||'')).join(' ')).toLowerCase();
-  if(!(q.rooms||[]).length)return 'Materiales y kits';
+  const rs=q.rooms||[];
+  const t=(rs.map(r=>r.name+' '+(r.cat||'')).join(' ')).toLowerCase();
+  if(!rs.length)return 'Otro ingreso';
+  if(rs.every(esKitL))return /artesan/.test(t)&&!/kit/.test(t)?'Venta de artesanía':'Venta de kits';
   if(/clase/.test(t)&&/m[uú]sica/.test(t))return 'Clases de música';
   if(/presentaci|concierto|show|evento/.test(t))return 'Presentaciones y eventos';
   return 'Talleres y capacitaciones';
 }
-function prodDeCot(q){const r=q.rooms||[];return r.length?r.map(x=>x.name).join(' + '):'Adicionales';}
+function prodDeCot(q){const r=q.rooms||[];return r.length?r.map(x=>x.name).join(' + '):((q.lines||[]).map(x=>x.name).join(' + ')||'Adicionales');}
 function datosVentaDeCot(q){return{tipo:tipoDeCot(q),canal:q.chan||'',pago:q.payMode||'',cli:q.cli||'',inst:q.inst||'',
   part:partQ(q),serv:Number(q.totHab)||0,proc:q.proc||'',ci:q.ci||''};}
 function numeroReserva(q){
@@ -3824,7 +3858,7 @@ function lecturasS8(M){
   if(M.part) L.push('Atendi\u00f3 a <b>'+M.part+'</b> participante'+(M.part===1?'':'s')+' en servicios confirmados, a un promedio de <b>'+solS8(M.porPart)+'</b> por participante.');
   if(M.porHab.length && M.tallTot>0){
     const p=M.porHab[0];
-    L.push('El taller que m\u00e1s ingresa es <b>'+escS8(p.n)+'</b> ('+Math.round(p.v/M.tallTot*100)+'% de lo cobrado en talleres).');
+    L.push('Lo que m\u00e1s ingresa es <b>'+escS8(p.n)+'</b> ('+Math.round(p.v/M.tallTot*100)+'% de lo cobrado en talleres y kits).');
   }
   if(M.porProc.length && M.porProc[0].n!=='Sin dato') L.push('Su principal tipo de cliente es <b>'+escS8(M.porProc[0].n).toLowerCase()+'</b>.');
   if(M.porCanal.length && M.total>0){
@@ -4110,14 +4144,15 @@ function construirCotizacionS8(q, db, persona){
        filasServ.map(([k,v])=>'<div class="sa-dl"><span>'+k+'</span><div>'+escS8(v)+'</div></div>').join('')+
      '</div></div>';
 
-  if(rooms.length){
-    h+='<div class="sa-card"'+A+' style="padding:0;overflow:hidden"><table class="sa-tbl">'+
-       '<thead><tr><th>Taller o capacitaci\u00f3n</th><th class="r">Cantidad</th><th class="r">Precio</th><th class="r">Importe</th></tr></thead><tbody>'+
-       rooms.map(r=>'<tr><td><b>'+escS8(r.name)+'</b>'+(r.dur?'<span class="inc">'+escS8(r.dur)+'</span>':'')+(r.inc?'<span class="inc">Incluye: '+escS8(r.inc)+'</span>':'')+'</td>'+
-         '<td class="r">'+escS8(uniCant(r.uni,r.qty))+'</td><td class="r">'+solS8(r.price)+'<span class="uni">'+escS8(uniInfo(r.uni)[1])+'</span></td>'+
+  const tall=rooms.filter(r=>!esKitL(r)),kits=rooms.filter(esKitL);
+  const tablaRooms=(titulo,rs,trae)=>'<div class="sa-card"'+A+' style="padding:0;overflow:hidden"><table class="sa-tbl">'+
+       '<thead><tr><th>'+titulo+'</th><th class="r">Cantidad</th><th class="r">Precio</th><th class="r">Importe</th></tr></thead><tbody>'+
+       rs.map(r=>'<tr><td><b>'+escS8(r.name)+'</b>'+(r.dur?'<span class="inc">'+escS8(r.dur)+'</span>':'')+(r.inc?'<span class="inc">'+trae+': '+escS8(r.inc)+'</span>':'')+'</td>'+
+         '<td class="r">'+escS8(uniCant(r.uni,r.qty))+'</td><td class="r">'+solS8(r.price)+(r.uni!=='unidad'?'<span class="uni">'+escS8(uniInfo(r.uni)[1])+'</span>':'')+'</td>'+
          '<td class="r imp">'+solS8(importeRoom(r))+'</td></tr>').join('')+
        '</tbody></table></div>';
-  }
+  if(tall.length)h+=tablaRooms('Taller o capacitaci\u00f3n',tall,'Incluye');
+  if(kits.length)h+=tablaRooms('Kit o producto',kits,'Trae');
   if(lines.length){
     h+='<div class="sa-card"'+A+' style="padding:0;overflow:hidden"><table class="sa-tbl">'+
        '<thead><tr><th>Adicionales</th><th class="r">Cantidad</th><th class="r">Precio</th><th class="r">Importe</th></tr></thead><tbody>'+
@@ -4141,7 +4176,8 @@ function construirCotizacionS8(q, db, persona){
        (q.obs?'<div class="sa-kk" style="margin-top:8px">Observaciones</div><div style="font-size:11.5px;white-space:pre-wrap">'+escS8(q.obs)+'</div>':'')+
      '</div>'+
      '<div class="sa-card sa-sum" style="width:290px;flex-shrink:0">'+
-       (rooms.length?'<div class="row"><span>Talleres y capacitaciones</span><span>'+solS8(q.totHab)+'</span></div>':'')+
+       (tall.length?'<div class="row"><span>Talleres y capacitaciones</span><span>'+solS8(tall.reduce((x,r)=>x+importeRoom(r),0))+'</span></div>':'')+
+       (kits.length?'<div class="row"><span>Kits y productos</span><span>'+solS8(kits.reduce((x,r)=>x+importeRoom(r),0))+'</span></div>':'')+
        (lines.length?'<div class="row"><span>Adicionales</span><span>'+solS8(q.totAd)+'</span></div>':'')+
        (Number(q.dscto)?'<div class="row neg"><span>Descuento</span><span>\u2212 '+solS8(q.dscto)+'</span></div>':'')+
        (q.igv?'<div class="row"><span>Subtotal</span><span>'+solS8((Number(q.tot)||0)-(Number(q.igvM)||0))+'</span></div><div class="row"><span>IGV (18%)</span><span>'+solS8(q.igvM)+'</span></div>':'')+
@@ -4325,7 +4361,7 @@ function openNewSale(){
 function onServSel(){const v=$('msServ').value;if(v==='')return;const p=DB.products[+v];if(!p)return;
   $('msDesc').value=p.name;if(Number(p.price))$('msTot').value=p.price;
   const c=(p.name+' '+(p.cat||'')).toLowerCase();
-  $('msTipo').value=esHab(p)?'Talleres y capacitaciones':/material|kit|insumo/.test(c)?'Materiales y kits':/artesan|venta/.test(c)?'Venta de artesanía':/presentaci|evento|show/.test(c)?'Presentaciones y eventos':'Otro ingreso';}
+  $('msTipo').value=esHab(p)?'Talleres y capacitaciones':/artesan/.test(c)&&!/kit/.test(c)?'Venta de artesanía':(esKit(p)||/kit|material/.test(c))?'Venta de kits':/presentaci|evento|show/.test(c)?'Presentaciones y eventos':'Otro ingreso';}
 function saveSale(){
   const tipo=$('msTipo').value;
   const total=Number($('msTot').value)||0;
@@ -4372,7 +4408,7 @@ function renderSaleList(){
   const mes=arr.filter(o=>(o.ts||0)>=monthStart()).reduce((a,o)=>a+val(o),0);
   $('cajaRes').innerHTML=arr.length?`<span>${arr.length} ${ing?'ingreso':'gasto'}${arr.length===1?'':'s'} registrados</span><span>Últimos 30 días: <b>${fmtK(mes)}</b></span>`:'';
   const el=$('saleList');
-  if(!list.length){el.innerHTML=`<div class="empty"><span class="ei">${ing?'💰':'🧾'}</span><p>${ing?'Los servicios se registran solos al confirmarlos.<br>Aquí suma clases sueltas, ventas de artesanía u otros ingresos con <strong>+ Ingreso</strong>.':'Registra materiales, movilidad, facilitadores o publicidad con <strong>+ Gasto</strong>.'}</p></div>`;return;}
+  if(!list.length){el.innerHTML=`<div class="empty"><span class="ei">${ing?'💰':'🧾'}</span><p>${ing?'Los servicios se registran solos al confirmarlos.<br>Aquí suma tus ventas del día (kits, artesanía, ferias) u otros ingresos con <strong>+ Ingreso</strong>.':'Registra materiales, movilidad, facilitadores o publicidad con <strong>+ Gasto</strong>.'}</p></div>`;return;}
   renderMovs(el,list,true);
 }
 
